@@ -19,3 +19,14 @@ jobs:
     steps:
       - name: Displaying Environment
         run: echo "${{inputs.environment}}"
+        
+      - name: Create S3 bucket
+        run: |
+          aws s3 mb hex-s3-gh-${{ inputs.environment }}
+          if [ "${{ inputs.environment }}" == 'prod' ]; then
+            aws s3api put-bucket-versioning --bucket hex-s3-gh-${{ inputs.environment }} --versioning-configuration Status=Enabled
+          fi
+        continue-on-error: true
+			
+      - name: Upload files to s3
+        run: aws s3 cp upload/ s3://hex-s3-gh-${{ inputs.environment }}/upload/ --recursive
