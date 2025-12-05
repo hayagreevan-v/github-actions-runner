@@ -4,8 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: environment
+        type: choice
         description: Enter environment
+        required: true
+        options:
+        - dev
+        - prod
+        - stage
 
 jobs:
   s3_deploy:
