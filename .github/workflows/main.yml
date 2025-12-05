@@ -12,6 +12,11 @@
 
 name: runner-demo
 on:
+  pull_request:
+    types: 
+      - closed]
+    branches: 
+      - main
   workflow_dispatch:
 
 jobs:
@@ -19,10 +24,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify AWS identity (instance role)
+        run: aws sts get-caller-identity
+
       - name: Create s3 bucket
         run: aws s3 mb s3://hex-github-actions-bucket
 
       - name: Upload files to s3
-        run: aws s3 cp upload/ s3://hex-github-actions-bucket/ --recursive
+        run: aws s3 cp upload/ s3://hex-github-actions-bucket/upload/ --recursive
+        
+      - name: Check files at s3
+        run: aws s3 ls s3://hex-github-actions-bucket/upload/ --recursive
         
 
