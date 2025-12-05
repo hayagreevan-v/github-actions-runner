@@ -14,7 +14,7 @@ name: runner-demo
 on:
   pull_request:
     types: 
-      - closed]
+      - closed
     branches: 
       - main
   workflow_dispatch:
