@@ -1,0 +1,16 @@
+name: S3 Deployment with parameter
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Enter environment
+
+jobs:
+  s3_deploy:
+    runs-on: hayagreevan-gh-runner
+
+    steps:
+      - name: Displaying Environment
+        run: echo "${{inputs.environment}}"
