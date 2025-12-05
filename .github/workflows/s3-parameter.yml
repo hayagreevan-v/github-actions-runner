@@ -14,7 +14,7 @@ on:
 
 jobs:
   s3_deploy:
-    runs-on: hayagreevan-gh-runner
+    runs-on: self-hosted
 
     steps:
       - name: Displaying Environment
