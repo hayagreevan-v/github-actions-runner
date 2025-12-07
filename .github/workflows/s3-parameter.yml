@@ -22,7 +22,7 @@ jobs:
       - name: Build final bucket name
         id: vars
         run: |
-          FINAL_BUCKET="${{ inputs.bucketName }}-${{ inputs.environment }}"
+          FINAL_BUCKET="hex-gh-${{ inputs.environment }}"
           echo "bucket=$FINAL_BUCKET" >> $GITHUB_OUTPUT
 
       - name: Create S3 bucket
